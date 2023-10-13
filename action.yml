@@ -40,7 +40,7 @@ runs:
     - name: 'Download artifacts'
       uses: actions/download-artifact@v3
       with:
-        path: ${{ github.workspace }}/millicastNativeSDK-artifacts
+        path: ${{ github.workspace }}/${{ github.repository_name }}-artifacts
     - id: createRelease
       run: |
         curl -v -L -X POST \
@@ -61,7 +61,7 @@ runs:
       shell: bash
     - if: ${{ inputs.attach_assets == 'true' }}
       run: |
-        cd ${{ github.workspace }}/millicastNativeSDK-artifacts
+        cd ${{ github.workspace }}/${{ github.repository_name }}-artifacts
         echo "Upload url: ${{ steps.createRelease.outputs.GH_RELEASE_UPLOAD_URL }}"
 
         for asset in $(find . -type f)
